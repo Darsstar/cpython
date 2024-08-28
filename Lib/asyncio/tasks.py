@@ -476,7 +476,9 @@ async def wait_for(fut, timeout):
     # asyncio.run(test_waitfor())
 
 
-    if timeout is not None and timeout <= 0:
+    if timeout is None:
+        return await fut
+    elif timeout <= 0:
         fut = ensure_future(fut)
 
         if fut.done():
